@@ -4,26 +4,12 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+	"allora_offchain_node/lib"
 
 	emissionstypes "github.com/allora-network/allora-chain/x/emissions/types"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/viper"
 )
-
-var (
-	LOCALIP       string
-	CONFIG_STRUCT ConfigStruct
-)
-
-type ConfigStruct struct {
-	Servers []WalletInfo `yaml:"servers"`
-}
-
-type WalletInfo struct {
-	ServerHostIP           string `yaml:"serverHostIP"`
-	AddressKeyName         string `yaml:"addressKeyName"`
-	AddressRestoreMnemonic string `yaml:"addressRestoreMnemonic"`
-}
 
 func (suite *UseCaseSuite) Wait(seconds int64) {
 	time.Sleep(time.Duration(seconds) * time.Second)
@@ -60,7 +46,7 @@ func GetLocalIP() {
 	}
 	log.Info().Str("local ip--------------->:", ip).Msg("get local ip")
 
-	LOCALIP = ip
+	lib.LOCALIP = ip
 }
 
 func ReadFile() {
@@ -72,11 +58,11 @@ func ReadFile() {
 	if err := configViperConfig.ReadInConfig(); err != nil {
 		panic(err)
 	}
-	var c ConfigStruct
+	var c lib.ConfigStruct
 	if err := configViperConfig.Unmarshal(&c); err != nil {
 		panic(err)
 	}
 
-	CONFIG_STRUCT = c
-	log.Info().Interface("--------config", CONFIG_STRUCT).Msg("read config file")
+	lib.CONFIG_STRUCT = c
+	log.Info().Interface("--------config", lib.CONFIG_STRUCT).Msg("read config file")
 }

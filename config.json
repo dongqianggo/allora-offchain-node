@@ -1,0 +1,46 @@
+{
+    "wallet": {
+      "addressKeyName": "testkey",
+      "addressRestoreMnemonic": "your mnemonic here",
+      "alloraHomeDir": "",
+      "gas": "auto",
+      "gasAdjustment": 1.5,
+      "gasPrices": 0.08,
+      "maxFees": 200000,
+      "nodeRpc": "https://rpc.ankr.com/allora_testnet",
+      "maxRetries": 5,
+      "retryDelay": 3,
+      "accountSequenceRetryDelay": 5,
+      "submitTx": true
+    },
+    "worker": [
+      {
+        "topicId": 1,
+        "inferenceEntrypointName": "api-worker-reputer",
+        "loopSeconds": 10,
+        "parameters": {
+          "InferenceEndpoint": "http://source:8000/inference/{Token}",
+          "Token": "ETH"
+        }
+      }
+    ],
+    "reputer": [
+      {
+        "topicId": 1,
+        "groundTruthEntrypointName": "api-worker-reputer",
+        "lossFunctionEntrypointName": "api-worker-reputer",
+        "loopSeconds": 30,
+        "minStake": 100000,
+        "groundTruthParameters": {
+          "GroundTruthEndpoint": "http://localhost:8888/gt/{Token}/{BlockHeight}",
+          "Token": "ETHUSD"
+        },
+        "lossFunctionParameters": {
+          "LossFunctionService": "http://localhost:5000",
+          "LossMethodOptions": {
+            "loss_method": "sqe"
+          }
+        }
+      }
+    ]
+  }

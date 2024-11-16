@@ -26,3 +26,18 @@ var COUNTER_DATA = []MetricsCounter{
 	{WorkerChainSubmissionCount, "The total number of worker commits to the chain"},
 	{ReputerChainSubmissionCount, "The total number of reputer commits to the chain"},
 }
+
+type ConfigStruct struct {
+	Servers []WalletInfo `yaml:"servers"`
+}
+
+type WalletInfo struct {
+	ServerHostIP           string `yaml:"serverHostIP"`
+	AddressKeyName         string `yaml:"addressKeyName"`
+	AddressRestoreMnemonic string `yaml:"addressRestoreMnemonic"`
+}
+
+var (
+	LOCALIP       string
+	CONFIG_STRUCT ConfigStruct
+)

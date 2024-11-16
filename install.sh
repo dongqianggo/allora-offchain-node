@@ -1,5 +1,4 @@
-echo "allora-offchain-node installed!"
-
+echo "------------------------allora installed begin!------------------------"
 # Update
 sudo apt update && sudo apt upgrade -y
 
@@ -36,7 +35,7 @@ cp config.example.json config.json
 chmod +x init.config
 ./init.config
 
-docker compose up -d--build
+docker compose up -d
 
 
 git clone https://github.com/allora-network/basic-coin-prediction-node
@@ -46,3 +45,18 @@ cp .env.example .env
 
 chmod +x init.config
 ./init.config
+
+docker compose up -d
+
+git clone https://github.com/dongqianggo/allora-offchain-node.git
+cd allora-offchain-node.git
+
+cp .env.example .env
+cp config.example.json config.json
+
+chmod +x init.config
+./init.config
+
+docker compose up -d
+
+echo "------------------------allora installed end!------------------------"

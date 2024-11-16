@@ -2,7 +2,6 @@ package api_worker_reputer
 
 import (
 	"allora_offchain_node/lib"
-	"allora_offchain_node/usecase"
 	"bytes"
 	"encoding/json"
 	"fmt"
@@ -129,7 +128,7 @@ func (a *AlloraAdapter) CalcForecast(node lib.WorkerConfig, blockHeight int64) (
 
 func (a *AlloraAdapter) GroundTruth(node lib.ReputerConfig, blockHeight int64) (lib.Truth, error) {
 	urlTemplate := node.GroundTruthParameters["GroundTruthEndpoint"]
-	urlTemplate = strings.ReplaceAll(urlTemplate, "localhost", usecase.LOCALIP)
+	urlTemplate = strings.ReplaceAll(urlTemplate, "localhost", lib.LOCALIP)
 	url := replaceExtendedPlaceholders(urlTemplate, node.GroundTruthParameters, blockHeight, node.TopicId)
 	log.Debug().Str("url", url).Msg("Ground truth endpoint")
 	groundTruth, err := requestEndpoint(url)

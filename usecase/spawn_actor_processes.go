@@ -24,7 +24,7 @@ func (suite *UseCaseSuite) Spawn() {
 	for _, worker := range workers {
 		log.Info().Str("------parameters", worker.Parameters["InferenceEndpoint"]).Msg("InferenceEndpoint")
 		if inferenceEndpoint, ok := worker.Parameters["InferenceEndpoint"]; ok {
-			worker.Parameters["InferenceEndpoint"] = strings.Replace(inferenceEndpoint, "localhost", LOCALIP, 1)
+			worker.Parameters["InferenceEndpoint"] = strings.Replace(inferenceEndpoint, "localhost", lib.LOCALIP, 1)
 		}
 		if _, ok := alreadyStartedWorkerForTopic[worker.TopicId]; ok {
 			log.Debug().Uint64("topicId", worker.TopicId).Msg("Worker already started for topicId")
@@ -56,7 +56,7 @@ func (suite *UseCaseSuite) Spawn() {
 		log.Info().Str("------groundTruthParameters", reputer.GroundTruthParameters["InferenceEndpoint"]).Msg("GroundTruthParameters")
 
 		if groundTruthEndpoint, ok := reputer.GroundTruthParameters["InferenceEndpoint"]; ok {
-			reputer.GroundTruthParameters["GroundTruthEndpoint"] = strings.Replace(groundTruthEndpoint, "localhost", LOCALIP, 1)
+			reputer.GroundTruthParameters["GroundTruthEndpoint"] = strings.Replace(groundTruthEndpoint, "localhost", lib.LOCALIP, 1)
 		}
 		if _, ok := alreadyStartedReputerForTopic[reputer.TopicId]; ok {
 			log.Debug().Uint64("topicId", reputer.TopicId).Msg("Reputer already started for topicId")
