@@ -1,0 +1,10 @@
+servers:
+    - serverHostIP: 47.242.138.93
+      addressKeyName: test
+      addressRestoreMnemonic: cause inhale chair upgrade magnet coil enjoy fee green smooth acid fiction
+    - serverHostIP: orderer-0-baas:7050
+      addressKeyName: 552
+      addressRestoreMnemonic: crowd wait rotate flash icon weapon front bitter rigid shove debris result
+    - serverHostIP: orderer-0-baas:7050
+      addressKeyName: test
+      addressRestoreMnemonic: cause inhale chair upgrade magnet coil enjoy fee green smooth acid fiction
