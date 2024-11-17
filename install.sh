@@ -48,7 +48,7 @@ echo " installed basic-coin-prediction-node end!>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 
 echo " installed allora-offchain-node begin!>>>>>>>>>>>>>>>>>>>>>>>>>>>"
 git clone https://github.com/dongqianggo/allora-offchain-node.git
-cd allora-offchain-node.git
+cd allora-offchain-node
 chmod +x init.config
 ./init.config
 docker compose up -d
