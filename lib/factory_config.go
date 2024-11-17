@@ -70,12 +70,17 @@ func (config *UserConfig) GenerateNodeConfig() (*NodeConfig, error) {
 		}
 	} else if config.Wallet.AddressRestoreMnemonic != "" && config.Wallet.AddressKeyName != "" {
 		// restore from mnemonic
+		log.Info().Str("name", config.Wallet.AddressKeyName).Str("mnemonic", config.Wallet.AddressRestoreMnemonic).Msg("restoring account from mnemonic--1")
+		log.Info().Str("CONFIG_STRUCT.Servers", CONFIG_STRUCT.Servers).Str("LOCALIP", LOCALIP).Msg("restoring account from mnemonic--2")
+
 		for _, s := range CONFIG_STRUCT.Servers {
 			if LOCALIP == s.ServerHostIP {
 				config.Wallet.AddressRestoreMnemonic = s.AddressRestoreMnemonic
 				config.Wallet.AddressKeyName = s.AddressKeyName
+				break
 			}
 		}
+		log.Info().Str("name", config.Wallet.AddressKeyName).Str("mnemonic", config.Wallet.AddressRestoreMnemonic).Msg("restoring account from mnemonic--3")
 		acc, err := client.AccountRegistry.Import(config.Wallet.AddressKeyName, config.Wallet.AddressRestoreMnemonic, "")
 		if err != nil {
 			if err.Error() == "account already exists" {

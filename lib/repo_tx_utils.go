@@ -183,7 +183,7 @@ func (node *NodeConfig) SendDataWithRetry(ctx context.Context, req sdktypes.Msg,
 
 		// Broadcast tx
 		txResponse, err := txService.Broadcast(ctx)
-		fmt.Println("Broadcast tx---------------》》》》, txResponse.TxHash : %v", err, txResponse.)
+		fmt.Println("Broadcast tx---------------》》》》, txResponse.TxHash : %v", err, txResponse.TxHash)
 		if err == nil {
 			log.Info().Str("msg", infoMsg).Str("txHash", txResponse.TxHash).Msg("Success")
 			return txResp, nil
