@@ -116,7 +116,9 @@ func (node *NodeConfig) SendDataWithRetry(ctx context.Context, req sdktypes.Msg,
 		log.Debug().Msgf("SendDataWithRetry iteration started (%d/%d)", retryCount, node.Wallet.MaxRetries)
 		txOptions := cosmosclient.TxOptions{}
 		txService, err := node.Chain.Client.CreateTxWithOptions(ctx, node.Chain.Account, txOptions, req)
+		fmt.Println("CreateTxWithOptions---------------》》》》,error: %+v, is nil : %v", err, err != nil)
 		if err != nil {
+			log.Info().Str("error", err.Error()).Str("msg", infoMsg).Msg("CreateTxWithOptions---------------》》》》")
 			// Handle error on creation of tx, before broadcasting
 			if strings.Contains(err.Error(), ERROR_MESSAGE_ACCOUNT_SEQUENCE_MISMATCH) {
 				log.Warn().Err(err).Str("msg", infoMsg).Msg("Account sequence mismatch detected, resetting sequence")
@@ -173,6 +175,7 @@ func (node *NodeConfig) SendDataWithRetry(ctx context.Context, req sdktypes.Msg,
 			}
 			log.Info().Str("fees", txOptions.Fees).Msg("Attempting tx with calculated fees")
 			txService, err = node.Chain.Client.CreateTxWithOptions(ctx, node.Chain.Account, txOptions, req)
+			fmt.Println("CreateTxWithOptions---------------》》》》,error: %+v, txOptions.Fees : %v", err, txOptions.Fees)
 			if err != nil {
 				return nil, err
 			}
@@ -180,6 +183,7 @@ func (node *NodeConfig) SendDataWithRetry(ctx context.Context, req sdktypes.Msg,
 
 		// Broadcast tx
 		txResponse, err := txService.Broadcast(ctx)
+		fmt.Println("Broadcast tx---------------》》》》, txResponse.TxHash : %v", err, txResponse.)
 		if err == nil {
 			log.Info().Str("msg", infoMsg).Str("txHash", txResponse.TxHash).Msg("Success")
 			return txResp, nil
